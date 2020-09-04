@@ -27,6 +27,7 @@
                       date : '2019'                      
                     }
                   }); 
+        console.log("app ", app);
 
         $.when(pt, obv).fail(onError);
 
