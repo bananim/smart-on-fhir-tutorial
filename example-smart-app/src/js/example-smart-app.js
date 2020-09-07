@@ -7,9 +7,25 @@
       ret.reject();
     }
 
-    function onReady(smart)  {
-      if (smart.hasOwnProperty('patient')) {
+    function onReady(smart)  { 
+                  
+      if (smart.hasOwnProperty('patient')) { 
+        
+        var app = smart.patient.api.fetchAll({
+                type: 'Appointment',
+                query : {
+                  date : 'ge2020-05-07T22:22:16.270Z',
+                  practitioner : '593923'
+                }
+              }); 
+        
+       
+        console.log("app ", app);
+        
+        
+        /*
         var patient = smart.patient;
+        
         var pt = patient.read();
         var obv = smart.patient.api.fetchAll({
                     type: 'Observation',
@@ -20,56 +36,41 @@
                               'http://loinc.org|2089-1', 'http://loinc.org|55284-4']
                       }
                     }
-                  });
-         var app = smart.patient.api.fetchAll({
-                    type: 'Appointment',
-                    query : {
-                      date : 'ge2019-12-07T22:22:16.270Z',
-                      practitioner : '593923'
-                    }
-                  }); 
-        console.log("app ", app);
-
+                  });  
+        
+        
         $.when(pt, obv).fail(onError);
-
         $.when(pt, obv).done(function(patient, obv) {
           var byCodes = smart.byCodes(obv, 'code');
           var gender = patient.gender;
-
           var fname = '';
           var lname = '';
-
           if (typeof patient.name[0] !== 'undefined') {
             fname = patient.name[0].given.join(' ');
             lname = patient.name[0].family;
           }
-
           var height = byCodes('8302-2');
           var systolicbp = getBloodPressureValue(byCodes('55284-4'),'8480-6');
           var diastolicbp = getBloodPressureValue(byCodes('55284-4'),'8462-4');
           var hdl = byCodes('2085-9');
           var ldl = byCodes('2089-1');
-
           var p = defaultPatient();
           p.birthdate = patient.birthDate;
           p.gender = gender;
           p.fname = fname;
           p.lname = lname;
           p.height = getQuantityValueAndUnit(height[0]);
-
           if (typeof systolicbp != 'undefined')  {
             p.systolicbp = systolicbp;
           }
-
           if (typeof diastolicbp != 'undefined') {
             p.diastolicbp = diastolicbp;
           }
-
           p.hdl = getQuantityValueAndUnit(hdl[0]);
           p.ldl = getQuantityValueAndUnit(ldl[0]);
-
           ret.resolve(p);
         });
+        */
       } else {
         onError();
       }
