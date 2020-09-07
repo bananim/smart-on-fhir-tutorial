@@ -24,7 +24,7 @@
          var app = smart.patient.api.fetchAll({
                     type: 'Appointment',
                     query : {
-                      date : '2020',
+                      date : 'ge2019-12-07T22:22:16.270Z',
                       practitioner : '593923'
                     }
                   }); 
@@ -41,7 +41,7 @@
 
           if (typeof patient.name[0] !== 'undefined') {
             fname = patient.name[0].given.join(' ');
-            lname = patient.name[0].family.join(' ');
+            lname = patient.name[0].family;
           }
 
           var height = byCodes('8302-2');
